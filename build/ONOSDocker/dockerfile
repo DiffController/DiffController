@@ -1,0 +1,25 @@
+FROM ubuntu:20.04
+
+RUN apt-get install unzip -y &&\
+    apt-get install net-tools -y &&\
+    apt-get install iputils-ping -y &&\
+    apt-get install vim -y &&\
+    apt-get autoclean &&\
+    apt-get install -y sudo &&\
+    apt-get install -y curl &&\
+    apt-get autoremove
+
+COPY onos-2.5.0.tar.gz jdk-11.0.16_linux-x64.tar.gz /home/
+WORKDIR /home
+
+RUN tar -zxvf jdk-11.0.16_linux-x64.tar.gz &&\
+    rm jdk-11.0.16_linux-x64.tar.gz &&\
+    tar -zxvf onos-2.5.0.tar.gz &&\
+    rm onos-2.5.0.tar.gz
+
+ENV JAVA_HOME=/home/jdk-11.0.16
+ENV JRE_HOME=$JAVA_HOME/jre
+ENV CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+ENV PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
+
+EXPOSE 8181 6653 6633

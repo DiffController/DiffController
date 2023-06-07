@@ -1,0 +1,22 @@
+FROM ubuntu:16.04
+
+RUN apt-get install unzip -y &&\
+    apt-get install net-tools -y &&\
+    apt-get install iputils-ping -y &&\
+    apt-get install vim -y &&\
+    apt-get autoclean &&\
+    apt-get autoremove
+COPY distribution-karaf-0.6.2-Carbon.zip jdk-8u333-linux-x64.tar.gz /home/
+WORKDIR /home
+
+RUN tar -zxvf jdk-8u333-linux-x64.tar.gz &&\
+    rm jdk-8u333-linux-x64.tar.gz &&\
+    unzip distribution-karaf-0.6.2-Carbon.zip &&\
+    rm distribution-karaf-0.6.2-Carbon.zip
+
+ENV JAVA_HOME=/home/jdk1.8.0_333
+ENV JRE_HOME=$JAVA_HOME/jre
+ENV CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+ENV PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
+
+EXPOSE 8181 6653 6633

@@ -1,0 +1,11 @@
+{
+    "python.analysis.extraPaths": [
+        "./pyloxi",
+        "./manager",
+        "./generation",
+        "./DecoderGuider",
+        "./pyloxi3",
+        "./OpenFlowProxy"
+    ],
+    "git.ignoreLimitWarning": true
+}

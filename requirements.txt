@@ -1,0 +1,8 @@
+dictdiffer==0.9.0
+interval3==2.0.0
+JPype1==1.4.1
+mininet==2.3.0.dev6
+networkx==2.7.1
+Requests==2.31.0
+ryu==4.34
+scapy==2.4.3
